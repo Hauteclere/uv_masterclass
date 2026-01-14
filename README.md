@@ -5,7 +5,7 @@ size: 16:9
 class: invert
 ---
 
-<h1>🐍 Modern Python Dependency Management With UV 🚀</h1>
+<h1>🐍 Modern Python Dependency Management With uv 🚀</h1>
 
 ---
 
@@ -19,12 +19,12 @@ ul {
 
 - [1. 👋 Intro 👋](#1--intro-)
   - [1.1. 🤓 Me 🤓](#11--me-)
-  - [1.2. ☀️ UV ☀️](#12-️-uv-️)
+  - [1.2. ☀️ `uv` ☀️](#12-️-uv-️)
 - [2. 🤷‍♀️ What Is Dependency Management? 🤷‍♀️](#2-️-what-is-dependency-management-️)
-  - [2.1. 🥀 What Did We Do Before UV? 🥀](#21--what-did-we-do-before-uv-)
+  - [2.1. 🥀 What Did We Do Before `uv`? 🥀](#21--what-did-we-do-before-uv-)
     - [2.1.1. 🤮 Why This Sucks 🤮](#211--why-this-sucks-)
   - [2.2. 👀 What Do Other Languages Do? 👀](#22--what-do-other-languages-do-)
-- [3. ✨ What UV Can Bring Us ✨](#3--what-uv-can-bring-us-)
+- [3. ✨ What `uv` Can Bring Us ✨](#3--what-uv-can-bring-us-)
   - [3.1. 🏃🏽‍♀️ SPEED 🏃🏽‍♀️](#31-️-speed-️)
   - [3.2. 🛠️ One Tool To Rule Them All 🛠️](#32-️-one-tool-to-rule-them-all-️)
   - [3.3. 🙂 Simplified Workflow 🙂](#33--simplified-workflow-)
@@ -46,9 +46,9 @@ ul {
 
 ---
 
-### 1.2. ☀️ UV ☀️
+### 1.2. ☀️ `uv` ☀️
 
-[![](./img/astral_logo.svg) UV is a new-ish dependency manager for Python.](https://docs.astral.sh/uv/)
+[![](./img/astral_logo.svg) `uv` is a new-ish dependency manager for Python.](https://docs.astral.sh/uv/)
 
  It is getting major (deserved) hype, and has completely revolutionised my toolset. 
 
@@ -68,7 +68,7 @@ Dependency management is the work of obtaining and organising all of the code th
 
 ---
 
-### 2.1. 🥀 What Did We Do Before UV? 🥀
+### 2.1. 🥀 What Did We Do Before `uv`? 🥀
 Python dependency management has historically been a total kludge.
 
 You're probably familiar with the `pip` + `venv` + `requirements.txt` system that we teach at She Codes. With this toolset you would:
@@ -167,19 +167,69 @@ python3 -m pip install -r requirements.txt
 
 ---
 
-## 3. ✨ What UV Can Bring Us ✨
+## 3. ✨ What `uv` Can Bring Us ✨
+
+![](./img/paradise.png)
 
 ---
 
 ### 3.1. 🏃🏽‍♀️ SPEED 🏃🏽‍♀️
 
+You don't think your pip installs are annoying but that's because you're used to them. Trust me, uv just feels so much nicer to use, because it's fast.
+
+[Don't believe me? I made a comparison video.](https://youtu.be/VNa2-I5AxA4)
+
 ---
 
 ### 3.2. 🛠️ One Tool To Rule Them All 🛠️
 
+- You handle your python version management with `uv`.
+- You handle your `venv` creation with `uv`.
+- You handle package management with `uv`.
+- `uv` initialises your directory as a git repo if it isn't one already.
+
 ---
 
 ### 3.3. 🙂 Simplified Workflow 🙂
+
+- Install `uv`:
+  ```bash
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+  ```
+- Install Python:
+  ```bash
+  uv python install
+  ```
+- Run a Python script (even if you don't have a venv or installed dependencies...?)
+  ```bash
+  uv run --with django example.py
+  ```
+
+---
+
+- Run a script (**even without a script file if you DON'T HAVE PYTHON INSTALLED???**)
+  ```bash
+  echo '# /// script
+  # dependencies = [
+  #   "requests<3",
+  #   "rich",
+  # ]
+  # ///
+
+  import requests
+  from rich.pretty import pprint
+
+  resp = requests.get("https://peps.python.org/api/peps.json")
+  data = resp.json()
+  pprint([(k, v["title"]) for k, v in data.items()][:10])' | uv run -
+  ```
+
+---
+
+- Nothing is beyond your reach!
+  ```bash
+  uv run --with jupyter jupyter notebook
+  ```
 
 ---
 
