@@ -118,22 +118,26 @@ python3 -m pip install -r requirements.txt
 #### 2.1.1. 🤮 Why This Sucks 🤮
 
 - Risk of globally installed dependencies
+  
   <img src="./img/burning_globe.gif" width="256">
 
 ---
 
 - Unmanaged Subdependencies
+  
   <img src="./img/subdependency.drawio.png" width="512">
 
 ---
 
 - Slow
+  
   ![](./img/slowpip_reddit.png)
   ![](./img/slow_pip.png)
 
 ---
 
 - Hard to distribute
+  
   ![](./img/hard_distribution.png)
 
 ---
@@ -147,6 +151,7 @@ python3 -m pip install -r requirements.txt
 ---
 
   (this is not a new problem)
+  
   <img src="./img/python_setup_failed.png" width="640">
 
 ---
