@@ -25,8 +25,8 @@ ul {
     - [2.1.1. 🤮 Why This Sucks 🤮](#211--why-this-sucks-)
   - [2.2. 👀 What Do Other Languages Do? 👀](#22--what-do-other-languages-do-)
 - [3. ✨ What UV Can Bring Us ✨](#3--what-uv-can-bring-us-)
-  - [3.1. 🛠️ One Tool To Rule Them All 🛠️](#31-️-one-tool-to-rule-them-all-️)
-  - [3.2. 🏃🏽‍♀️ SPEED 🏃🏽‍♀️](#32-️-speed-️)
+  - [3.1. 🏃🏽‍♀️ SPEED 🏃🏽‍♀️](#31-️-speed-️)
+  - [3.2. 🛠️ One Tool To Rule Them All 🛠️](#32-️-one-tool-to-rule-them-all-️)
   - [3.3. 🙂 Simplified Workflow 🙂](#33--simplified-workflow-)
   - [3.4. 📡 Distributability 📡](#34--distributability-)
   - [3.5. ✅ Correctness ✅](#35--correctness-)
@@ -64,6 +64,7 @@ Dependency management is the work of obtaining and organising all of the code th
 - If you're coding a Django website, then Django is a dependency for your project, because your site can't work without the Django library.
 - If you're coding an app in "pure Python", you still have dependencies - your app won't run without the Python interpreter!
 - Even projects from compiled languages have dependencies that need to be managed during the build process.
+- Dependencies shouldn't be installed globally!
 
 ---
 
@@ -115,6 +116,12 @@ python3 -m pip install -r requirements.txt
 ---
 
 #### 2.1.1. 🤮 Why This Sucks 🤮
+
+- Risk of globally installed dependencies
+  <img src="./img/burning_globe.gif" width="256">
+
+---
+
 - Unmanaged Subdependencies
   <img src="./img/subdependency.drawio.png" width="512">
 
@@ -140,15 +147,18 @@ python3 -m pip install -r requirements.txt
 ---
 
   (this is not a new problem)
-  ![](./img/python_setup_failed.png)
-
----
-
-- Sometimes gets it wrong! (And you might not know until it ruins your week 😱)
+  <img src="./img/python_setup_failed.png" width="640">
 
 ---
 
 ### 2.2. 👀 What Do Other Languages Do? 👀
+> Let's look at Rust as an example
+
+- install and manage compiler using `rustup` tool
+- built-in package manager called `cargo`
+- dependencies file (`Cargo.toml`) AND lockfile (`Cargo.lock`)
+- every repo is an isolated build-area
+  -> **no global packages** 
 
 ---
 
@@ -156,11 +166,11 @@ python3 -m pip install -r requirements.txt
 
 ---
 
-### 3.1. 🛠️ One Tool To Rule Them All 🛠️
+### 3.1. 🏃🏽‍♀️ SPEED 🏃🏽‍♀️
 
 ---
 
-### 3.2. 🏃🏽‍♀️ SPEED 🏃🏽‍♀️
+### 3.2. 🛠️ One Tool To Rule Them All 🛠️
 
 ---
 
