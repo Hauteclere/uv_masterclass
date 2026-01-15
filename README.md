@@ -5,13 +5,13 @@ size: 16:9
 class: invert
 ---
 
-<h1>🐍 Modern Python Dependency Management With uv 🚀</h1>
+<h1>Modern<br>Python Dependency Management 🐍<br>With uv 🚀</h1>
 
 ---
 
 <style scoped>
 ul {
-  font-size: 20px;
+  font-size: 19px;
 }
 </style>
 
@@ -30,8 +30,9 @@ ul {
   - [3.3. 🙂 Simplified Workflow 🙂](#33--simplified-workflow-)
   - [3.4. 📡 Distributability 📡](#34--distributability-)
   - [3.5. ✅ Correctness ✅](#35--correctness-)
-- [4. 🔄 Migrating Old Projects 🔄](#4--migrating-old-projects-)
-- [5. 🌱 New Project Setup 🌱](#5--new-project-setup-)
+- [4. 📥 Installing 📥](#4--installing-)
+- [5. 🔄 Migrating Old Projects 🔄](#5--migrating-old-projects-)
+- [6. 🌱 New Project Workflow 🌱](#6--new-project-workflow-)
 
 ---
 
@@ -50,9 +51,10 @@ ul {
 
 [![](./img/astral_logo.svg) `uv` is a new-ish dependency manager for Python.](https://docs.astral.sh/uv/)
 
- It is getting major (deserved) hype, and has completely revolutionised my toolset. 
+It is getting major (deserved) hype, and has completely revolutionised my toolset. 
 
-We don't use it in She Codes, but **you should**. Here's why.
+
+We don't use it in She Codes, but **you should use it personally**. This talk explains why.
 
 ---
 
@@ -110,14 +112,14 @@ source ./venv/bin/activate
 
 ```bash
 # install dependencies
-python3 -m pip install -r requirements.txt
+python3 -m pip install django
 ```
 
 ---
 
 #### 2.1.1. 🤮 Why This Sucks 🤮
 
-- Risk of globally installed dependencies
+- Potential for globally installed and/or untracked dependencies
   
   <img src="./img/burning_globe.gif" width="256">
 
@@ -157,19 +159,19 @@ python3 -m pip install -r requirements.txt
 ---
 
 ### 2.2. 👀 What Do Other Languages Do? 👀
-> Let's look at Rust as an example
-
-- install and manage compiler using `rustup` tool
-- built-in package manager called `cargo`
-- dependencies file (`Cargo.toml`) AND lockfile (`Cargo.lock`)
-- every repo is an isolated build-area
-  -> **no global packages** 
+- packages installed **locally** by default
+- lockfiles track subdependencies
+- often no need to install packages before running them
+- some consensus way of managing interpreter versions
+- distribution helpers
 
 ---
 
 ## 3. ✨ What `uv` Can Bring Us ✨
 
 ![](./img/paradise.png)
+[Here's an boilerplate `uv` project](https://github.com/Hauteclere/uv_example/)
+
 
 ---
 
@@ -184,30 +186,27 @@ You don't think your pip installs are annoying but that's because you're used to
 ### 3.2. 🛠️ One Tool To Rule Them All 🛠️
 
 - You handle your python version management with `uv`.
-- You handle your `venv` creation with `uv`.
+- You handle your `.venv` creation with `uv`.
 - You handle package management with `uv`.
 - `uv` initialises your directory as a git repo if it isn't one already.
+- `uv` builds and distributes your software.
 
 ---
 
 ### 3.3. 🙂 Simplified Workflow 🙂
 
-- Install `uv`:
+- Want to install Python?
   ```bash
-  curl -LsSf https://astral.sh/uv/install.sh | sh
+  uv python install 3.14
   ```
-- Install Python:
+- Want to run a Python script even if you don't have a venv or installed dependencies...?
   ```bash
-  uv python install
-  ```
-- Run a Python script (even if you don't have a venv or installed dependencies...?)
-  ```bash
-  uv run --with django example.py
+  uv run --with django your_script_name.py
   ```
 
 ---
 
-- Run a script (**even without a script file if you DON'T HAVE PYTHON INSTALLED???**)
+- Want to run a script **even without a script file OR A PYTHON INSTALLATION???**
   ```bash
   echo '# /// script
   # dependencies = [
@@ -227,6 +226,9 @@ You don't think your pip installs are annoying but that's because you're used to
 ---
 
 - Nothing is beyond your reach!
+
+  > Oliver remember to run this one in Windows because your Ubuntu isn't set up right. And put it in a blank directory, please.
+
   ```bash
   uv run --with jupyter jupyter notebook
   ```
@@ -235,18 +237,116 @@ You don't think your pip installs are annoying but that's because you're used to
 
 ### 3.4. 📡 Distributability 📡
 
+- `uv` projects are easy to distribute
+  - [A few lines in your `pyproject.toml`.](https://github.com/Hauteclere/uv_example/)
+  - Get your directory structure right.
+  - `uv build`
+  - `uv publish --token <insert pypi token here>`
+- [`uv` projects can be distributed to complete n00bs.](https://pypi.org/project/she-codes-uv-example/) 
+
 ---
 
 ### 3.5. ✅ Correctness ✅
+- Lockfile means that subdependencies are handled perfectly every time, down to the smallest patch.
+- `uv` is strict enough that the biggest problem people find when migrating from `pip` is that they discover their project had unresolveable dependencies all along and shouldn't technically have been possible. `pip` just swept it under the rug.
 
 ---
 
-## 4. 🔄 Migrating Old Projects 🔄
+## 4. 📥 Installing 📥
+[Shockingly, scarily easy.](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer)
+
+One terminal command on all major OS. Check the link for yours.
 
 ---
 
-## 5. 🌱 New Project Setup 🌱
+## 5. 🔄 Migrating Old Projects 🔄
+1.  ```bash
+    uv init .
+    ```
+2.  ```bash
+    uv add -r requirements.txt
+    ```
+
+> Damn this presentation i going to run short isn't it...?
 
 ---
 
-Fin.
+## 6. 🌱 New Project Workflow 🌱
+
+1. create a project directory:
+    ```bash
+    cd ~
+    ```
+    ```bash
+    mkdir uv_example_repo
+    ```
+    ```bash
+    cd uv_example_repo
+    ```
+2. initialise the repo:
+    ```bash
+    uv init .
+    ```
+
+---
+
+3. add a dependency:
+    ```bash 
+    uv add cowsay
+    ```
+4. write some code:
+    ```diff
+    # main.py
+
+    + import cowsay
+    
+    def main():
+    -   print("Hello from test-uv-example!")
+    +   cowsay.cow("Hello from test-uv-example!")
+
+    if __name__ == "__main__":
+        main()
+
+    ```
+
+---
+
+5. Run your program:
+    ```bash
+    uv run main.py
+    ```
+
+    output:
+
+    ```
+      ___________________________
+    | Hello from test-uv-example! |
+      ===========================
+                              \
+                                \
+                                  ^__^
+                                  (oo)\_______
+                                  (__)\       )\/\
+                                      ||----w |
+                                      ||     ||
+    ```
+
+---
+
+> Note that we never activated a virtual environment there! You still can if you want to, using the same command as you always have. That means that you can still run your projects with `python main.py` if you want to!
+> 
+> Similarly, if you still want to use the `pip` commands you're used to you can run:
+> - `uv venv my_venv_name` (to create a venv)
+> - `uv pip install my_package_name` (to create a package)
+> - etc
+---
+
+Things we didn't cover that `uv` also nails:
+- platform-specific dependencies (ask a Python educator how much they hate these)
+- "development dependencies"
+
+---
+
+So why aren't we using it for She Codes?
+
+> This isn't a challenge - in the live version of this talk I explain my reasoning. Basically - `uv` is still so new that you still need to know the old way of doing things for employability.
