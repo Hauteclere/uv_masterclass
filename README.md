@@ -170,6 +170,7 @@ python3 -m pip install django
 ## 3. ✨ What `uv` Can Bring Us ✨
 
 ![](./img/paradise.png)
+
 [Here's an boilerplate `uv` project](https://github.com/Hauteclere/uv_example/)
 
 
