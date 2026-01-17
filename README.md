@@ -345,6 +345,7 @@ One terminal command on all major OS. Check the link for yours.
 Things we didn't cover that `uv` also nails:
 - platform-specific dependencies (ask a Python educator how much they hate these)
 - "development dependencies"
+- tons more stuff
 
 ---
 
